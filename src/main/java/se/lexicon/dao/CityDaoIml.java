@@ -144,9 +144,25 @@ public class CityDaoIml implements CityDao {
         return city;
     }
 
+    /*Update a city based on id. All columns except id
+    * */
     @Override
     public City update(City city) {
-        return null;
+        String query = "update city set Name=?, CountryCode=?, District=?, Population=? where ID=?";
+        try(
+                PreparedStatement preparedStatement =
+                        MySqlConnection.getConnection().prepareStatement(query)
+        ) {
+            preparedStatement.setString(1, city.getName());
+            preparedStatement.setString(2, city.getCountryCode());
+            preparedStatement.setString(3, city.getDistrict());
+            preparedStatement.setInt(4, city.getPopulation());
+            preparedStatement.setInt(5, city.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return city;
     }
 
     @Override

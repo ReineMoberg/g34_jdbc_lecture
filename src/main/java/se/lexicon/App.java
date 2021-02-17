@@ -22,8 +22,12 @@ public class App {
         //List<City> foundByName = dao.findByName("Los Angeles");
         //foundByName.forEach(System.out::println);
 
-        City testCity = new City("Test City", "SWE","Test District",500);
-        City testCity2 = dao.add(testCity);
+        //City testCity = new City("Test City", "SWE","Test District",500);
+        //City testCity2 = dao.add(testCity);
+        //System.out.println(testCity2);
+
+        City testCity = new City(4084,"Test City", "ARG","Test District",300);
+        City testCity2 = dao.update(testCity);
         System.out.println(testCity2);
 
         //List<City> findAll= dao.findAll();
