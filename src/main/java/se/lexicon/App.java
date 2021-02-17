@@ -26,9 +26,13 @@ public class App {
         //City testCity2 = dao.add(testCity);
         //System.out.println(testCity2);
 
+        //City testCity = new City(4084,"Test City", "ARG","Test District",300);
+        //City testCity2 = dao.update(testCity);
+        //System.out.println(testCity2);
+
         City testCity = new City(4084,"Test City", "ARG","Test District",300);
-        City testCity2 = dao.update(testCity);
-        System.out.println(testCity2);
+        int rowsAffected = dao.delete(testCity);
+        System.out.println(rowsAffected);
 
         //List<City> findAll= dao.findAll();
         //findAll.forEach(System.out::println);

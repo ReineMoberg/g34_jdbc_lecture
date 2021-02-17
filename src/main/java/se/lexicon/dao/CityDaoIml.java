@@ -149,7 +149,7 @@ public class CityDaoIml implements CityDao {
     @Override
     public City update(City city) {
         String query = "update city set Name=?, CountryCode=?, District=?, Population=? where ID=?";
-        try(
+        try (
                 PreparedStatement preparedStatement =
                         MySqlConnection.getConnection().prepareStatement(query)
         ) {
@@ -165,8 +165,21 @@ public class CityDaoIml implements CityDao {
         return city;
     }
 
+    /*Delete a city based on id
+    * */
     @Override
     public int delete(City city) {
-        return 0;
+        String query = "delete from city where id=?";
+        int rowsAffected = 0;
+        try (
+                PreparedStatement preparedStatement =
+                        MySqlConnection.getConnection().prepareStatement(query)
+        ) {
+            preparedStatement.setInt(1, city.getId());
+            rowsAffected = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowsAffected;
     }
 }
