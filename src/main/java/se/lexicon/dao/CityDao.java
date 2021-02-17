@@ -4,6 +4,9 @@ import se.lexicon.model.City;
 
 import java.util.List;
 
+/*Methods to be implemented by Class(es)
+* */
+
 public interface CityDao {
 
     City findById(int id);

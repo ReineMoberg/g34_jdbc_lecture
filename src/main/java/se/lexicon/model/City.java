@@ -2,14 +2,19 @@ package se.lexicon.model;
 
 import java.util.Objects;
 
+/*Object to store city information from database in
+* */
+
 public class City {
-    // variables
+
+    // variables, comes from database columns
     private int id;
     private String name;
     private String countryCode;
     private String district;
     private int population;
 
+    //Full constructor
     public City(int id, String name, String countryCode, String district, int population) {
         this.id = id;
         this.name = name;
@@ -17,14 +22,14 @@ public class City {
         this.district = district;
         this.population = population;
     }
-
+    //Constructor without id
     public City(String name, String countryCode, String district, int population) {
         this.name = name;
         this.countryCode = countryCode;
         this.district = district;
         this.population = population;
     }
-
+    //Default constructor
     public City() {
     }
 

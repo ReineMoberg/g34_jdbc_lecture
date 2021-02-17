@@ -11,14 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CityDaoIml implements CityDao {
+
+    /*Find city information by id from database 'world.city'
+    * */
     @Override
     public City findById(int id) {
-        String query = "select * from city where id = ?";
+        String query = "select * from city where id = ?"; //mySQL query statement
         City city = new City();
         try (
-                PreparedStatement preparedStatement = MySqlConnection.getConnection().prepareStatement(query);
+                PreparedStatement preparedStatement =
+                        MySqlConnection.getConnection().prepareStatement(query); //Use this statement when using parameters in query
         ) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, id);    //Set id in question mark in query, parameter 1
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 city.setId(resultSet.getInt(1));
@@ -34,9 +38,31 @@ public class CityDaoIml implements CityDao {
         return city;
     }
 
+    /*Find list of cities information by country code
+    * */
     @Override
     public List<City> findByCode(String code) {
-        return null;
+        String query = "select * from city where CountryCode = ?";
+        List<City> cityList = new ArrayList<>();
+        try(
+                PreparedStatement preparedStatement =
+                        MySqlConnection.getConnection().prepareStatement(query);
+        ) {
+            preparedStatement.setString(1,code);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                cityList.add(new City(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getInt(5)
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cityList;
     }
 
     @Override
@@ -44,12 +70,14 @@ public class CityDaoIml implements CityDao {
         return null;
     }
 
+    /*Find all city information from database
+    * */
     @Override
     public List<City> findAll() {
-        String query = "select * from city";
+        String query = "select * from city";    //mySQL query statement
         List<City> cityList= new ArrayList<>();
         try {
-            Statement statement = MySqlConnection.getConnection().createStatement();
+            Statement statement = MySqlConnection.getConnection().createStatement(); //No parameters in query
             ResultSet resultSet= statement.executeQuery(query);
             while (resultSet.next()){
                 cityList.add(new City(

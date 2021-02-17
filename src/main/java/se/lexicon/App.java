@@ -10,12 +10,17 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
+
         CityDao dao = new CityDaoIml();
+
         //City city = dao.findById(11);
         //System.out.println("city = " + city);
 
-        List<City> findAll= dao.findAll();
-        findAll.forEach(System.out::println);
+        List<City> foundByCode = dao.findByCode("SWE");
+        foundByCode.forEach(System.out::println);
+
+        //List<City> findAll= dao.findAll();
+        //findAll.forEach(System.out::println);
 
     }
 }
