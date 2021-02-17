@@ -65,9 +65,31 @@ public class CityDaoIml implements CityDao {
         return cityList;
     }
 
+    /*Find list of cities information by city name
+     * */
     @Override
     public List<City> findByName(String name) {
-        return null;
+        String query = "select * from city where Name like ?";
+        List<City> cityList = new ArrayList<>();
+        try (
+                PreparedStatement preparedStatement =
+                        MySqlConnection.getConnection().prepareStatement(query);
+        ) {
+            preparedStatement.setString(1, name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                cityList.add(new City(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getInt(5)
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return cityList;
     }
 
     /*Find all city information from database

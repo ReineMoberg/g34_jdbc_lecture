@@ -16,8 +16,11 @@ public class App {
         //City city = dao.findById(11);
         //System.out.println("city = " + city);
 
-        List<City> foundByCode = dao.findByCode("SWE");
-        foundByCode.forEach(System.out::println);
+        //List<City> foundByCode = dao.findByCode("SWE");
+        //foundByCode.forEach(System.out::println);
+
+        List<City> foundByName = dao.findByName("Los Angeles");
+        foundByName.forEach(System.out::println);
 
         //List<City> findAll= dao.findAll();
         //findAll.forEach(System.out::println);
